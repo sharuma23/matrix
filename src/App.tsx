@@ -64,24 +64,63 @@ function getMatriceDimensions(matrice : number[][]) : number[] {
   return [matrice.length, matrice[0].length];
 }
 
-function multiplyMatrice(matrice1 : number[][], matrice2 : number[][]) : number[][] {
-  const matrice1_rowCount : number = matrice1.length;
-  const matrice1_columnCount : number = matrice1[0].length;
-  const matrice2_rowCount : number = matrice2.length;
-  const matrice2_columnCount : number = matrice2[0].length;
+function convertColumnsToArrays(matrice : number[][]) : number[][] {
+  const rows : number[][] = [];
 
-  if (matrice1_columnCount === matrice2_rowCount) {
-    return [[0]];
+  for (let i = 0; i < matrice[0].length; i++) {
+  let newArr : number[] = [];
+    for (let r = 0; r < matrice.length; r++) {
+      newArr.push(matrice[r][i]);
+    }
+    rows.push(newArr);
   }
 
-  
-
+  return rows;
 }
 
-// console.log(JSON.stringify(convertWordToMatrice(2, 2, "abcd")));
+function getDotProduct(arr1 : number[], arr2 : number[]) : number {
+  if (arr1.length !== arr2.length) {
+    return 0;
+  }
 
-console.log(generateMatricesDimensions(getFactors(8)));
-console.log(createMatrice(2, 4, getCharacterCodes("SHIVANSH")));
+  let sum : number = 0;
+
+  for (let i = 0; i < arr1.length; i++) {
+    sum += arr1[i] * arr2[i];
+  }
+
+  return sum;
+}
+
+function multiplyMatrices(matrice1: number[][], matrice2: number[][]): number[][] {
+  const matrice2_converted = convertColumnsToArrays(matrice2);
+
+  const newMatrix = [];
+
+  for (let r = 0; r < matrice1.length; r++) {
+      const newArr = [];
+      for (let r2 = 0; r2 < matrice2_converted.length; r2++) {
+          newArr.push(getDotProduct(matrice1[r], matrice2_converted[r2]));
+      }
+      newMatrix.push(newArr);
+  }
+
+  return newMatrix;
+}
+
+let m1 = [
+  [2, 5],
+  [2, 6],
+  [1, 8],
+  [4, 9]
+];
+
+let m2 = [
+  [2, 8, 7],
+  [9, 2, 1]
+];
+
+console.log(multiplyMatrices(m1, m2));
 
 export default function App() {
   const [matrice, setmatrice] = useState<number[]>([]);
