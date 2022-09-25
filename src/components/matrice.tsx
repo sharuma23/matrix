@@ -1,6 +1,7 @@
 interface PropTypes {
   matrice: number[][],
-  color: string
+  color: string,
+  showChar: boolean
 
 }
 
@@ -44,9 +45,13 @@ export default function Matrice(props: PropTypes) {
       cells.push(
         <span style={styles.cell} key={`${[r, c]}`}>
           {props.matrice[r][c]}
-          <br />
-          <br />
-          {String.fromCharCode(props.matrice[r][c])}    
+          {props.showChar &&
+            <>
+              <br />
+              <br />
+              {String.fromCharCode(props.matrice[r][c])}
+            </>
+          }
         </span>
       )
     }

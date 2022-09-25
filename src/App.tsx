@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import reactLogo from './assets/react.svg';
 import './App.css';
 import Matrice from './components/matrice';
-import InputMatrice from './components/inputMatrice';
 
 function getFactors(integer: number): number[][] {
   const integerRoot = Math.sqrt(integer);
@@ -123,10 +122,10 @@ const m2 = [
 
 export default function App() {
   const [word, setWord] = useState<string>('');
-  const [matriceDimensions, setMatriceDimensions] = useState<number[]>([]);
   const [buttons, setButtons] = useState<JSX.Element[]>([]);
   const [wordMatrice, setWordMatrice] = useState<number[][]>([]);
   const [keyMatrice, setKeyMatrice] = useState<number[][]>([]);
+  const [encryptedMatrice, setEncryptedMatrice] = useState<number[][]>([]);
 
   return (
     <div className="page">
@@ -153,9 +152,17 @@ export default function App() {
                     type="button"
                     key={`${dimensions[i]}`}
                     onClick={() => {
-                      setMatriceDimensions(dimensions[i]);
                       setWordMatrice(generateWordMatrice(dimensions[i][0], dimensions[i][1], localWord));
-                      // setKeyMatrice(new Array(dimensions[i][0]).fill(new Array(dimensions[i][1]).fill(0)));
+
+                      //key should have the opposite dimensions of the original
+                      const rowCount = dimensions[i][1];
+                      const columnCount = dimensions[i][0];
+                      const data : number[] = [];
+                      for (let i = 0; i < rowCount * columnCount; i++) {
+                        data.push(Math.floor(Math.random()*101));
+                      }                        
+                      setKeyMatrice(createMatrice(rowCount, columnCount, data));
+
                     }}
                   >
                     {dimensions[i][0]} x {dimensions[i][1]}
@@ -167,8 +174,7 @@ export default function App() {
               setButtons([]);
               setWord('');
               setWordMatrice([]);
-              setMatriceDimensions([]);
-              // setKeyMatrice([]);
+              setKeyMatrice([]);
             }
 
           }}
@@ -182,14 +188,17 @@ export default function App() {
         {word !== ''
           &&
           <>
-            <Matrice matrice={wordMatrice} color={"#32CD32"} />
-            <InputMatrice matrice={wordMatrice} setMatrice={setKeyMatrice} color={"#AFDCEC"} />
-            {console.log("word", wordMatrice)}
-            {console.log("key", keyMatrice)}
-            {/* {console.log("product", multiplyMatrices(wordMatrice, keyMatrice))} */}
-            {/* <Matrice matrice={multiplyMatrices(wordMatrice, keyMatrice)} color={"#FF0000"}/> */}
+            <Matrice matrice={wordMatrice} color={"#32CD32"} showChar={true}/>
+            <Matrice matrice={keyMatrice} color={"#006994"} showChar={false}/>
           </>
         }
+        
+        <button
+          onClick={()=>{
+            setEncryptedMatrice(multiplyMatrices(wordMatrice, keyMatrice));
+          }}
+        >Encrypt</button>
+        <Matrice matrice={encryptedMatrice} color={"#FFFF00"} showChar={false}/>
 
 
       </div>
