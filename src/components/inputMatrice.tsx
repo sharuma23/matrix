@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Cell from './cell'
 
 interface PropTypes {
   matrice: number[][],
@@ -14,14 +15,8 @@ export default function InputMatrice(props: PropTypes) {
 
   const columnCount: number = props.matrice[0].length;
   const rowCount: number = props.matrice.length;
-  const [keyMatrice, setKeyMatrice] = useState<number[][]>([]);
-
-  const mainArr : number[][] = [];
-  for (let r = 0; r < rowCount; r++) {
-    const newArr: number[] = [];
-    newArr.length = columnCount;
-    mainArr.push(newArr);
-  }
+  const [keyMatrice, setKeyMatrice] = useState<number[][]>(new Array(rowCount).fill(new Array(columnCount).fill(0)));
+  // props.setMatrice(new Array(rowCount).fill(new Array(columnCount).fill(0)));
 
   const styles = {
     container: {
@@ -30,7 +25,7 @@ export default function InputMatrice(props: PropTypes) {
       width: `${110 * columnCount + 5 * (columnCount - 1)}px`,
       flexWrap: "wrap",
       justifyContent: "center",
-      padding: "25px"
+      // padding: "25px"
     },
     cell: {
       backgroundColor: props.color,
@@ -47,23 +42,25 @@ export default function InputMatrice(props: PropTypes) {
     }
   };
 
-  const cellCount = columnCount * rowCount;
-
   const cells = [];
+
+  const onChange = (number : number, r : number, c : number) => {
+    let copy = keyMatrice;
+    copy[r][c] = number;
+    setKeyMatrice(copy);
+    props.setMatrice(copy);
+  }
 
   for (let r = 0; r < rowCount; r++) {
     for (let c = 0; c < columnCount; c++) {
       cells.push(
-        <span
-          style={styles.cell}
+        <Cell
           key={`${[r, c]}`}
-          contentEditable={true}
-          onInput={(e) => {
-            mainArr[r][c] = Number(e.currentTarget.value);
-            props.setMatrice(mainArr);
-          }}
-        >
-        </span>
+          color={props.color}
+          r={r}
+          c={c}
+          onChange={onChange}
+        />
       )
     }
   }

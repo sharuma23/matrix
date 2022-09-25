@@ -155,6 +155,7 @@ export default function App() {
                     onClick={() => {
                       setMatriceDimensions(dimensions[i]);
                       setWordMatrice(generateWordMatrice(dimensions[i][0], dimensions[i][1], localWord));
+                      // setKeyMatrice(new Array(dimensions[i][0]).fill(new Array(dimensions[i][1]).fill(0)));
                     }}
                   >
                     {dimensions[i][0]} x {dimensions[i][1]}
@@ -167,6 +168,7 @@ export default function App() {
               setWord('');
               setWordMatrice([]);
               setMatriceDimensions([]);
+              // setKeyMatrice([]);
             }
 
           }}
@@ -180,8 +182,12 @@ export default function App() {
         {word !== ''
           &&
           <>
-            <Matrice matrice={wordMatrice} color={"#AFDCEC"} />
-            <InputMatrice matrice={wordMatrice} setStateFunction={setKeyMatrice} color={"#32CD32"} />
+            <Matrice matrice={wordMatrice} color={"#32CD32"} />
+            <InputMatrice matrice={wordMatrice} setMatrice={setKeyMatrice} color={"#AFDCEC"} />
+            {console.log("word", wordMatrice)}
+            {console.log("key", keyMatrice)}
+            {/* {console.log("product", multiplyMatrices(wordMatrice, keyMatrice))} */}
+            {/* <Matrice matrice={multiplyMatrices(wordMatrice, keyMatrice)} color={"#FF0000"}/> */}
           </>
         }
 
