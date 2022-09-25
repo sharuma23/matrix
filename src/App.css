@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@700&display=swap');
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -5,37 +7,84 @@
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.page {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.header {
+  width: 100%;
+  justify-content: center;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+h1.main-heading {
+  font-family: 'Courier Prime', monospace;
+  font-size: 4rem;
+
 }
 
-.card {
-  padding: 2em;
+h2 {
+  font-family: 'Courier Prime', monospace;
+  font-size: 1.5rem;
 }
 
-.read-the-docs {
-  color: #888;
+.input-area {
+  display: flex;
+  align-items: center;
+  width: 1084px;
+  flex-wrap: wrap;
+  flex-direction: column;
+  white-space: normal;
+}
+
+input.word-input {
+  width: 200px;
+  height: 35px;
+  border-radius: 20px;
+  padding: 10px;
+  border-color: transparent;
+  font-family: 'Courier Prime', monospace;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+input.word-input::placeholder {
+  text-align: center;
+}
+
+.buttons-container {
+  width: 225px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  padding: 20px;
+}
+
+button {
+  
+  display: inline-block;
+  outline: 0;
+  cursor: pointer;
+  padding: 5px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  vertical-align: middle;
+  border: 1px solid;
+  border-radius: 6px;
+  color: #ffffff;
+  background-color: #2ea44f;
+  border-color: #1b1f2326;
+  box-shadow: rgba(27, 31, 35, 0.04) 0px 1px 0px 0px, rgba(255, 255, 255, 0.25) 0px 1px 0px 0px inset;
+  transition: 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+  transition-property: color, background-color, border-color;
+  
+  
+}
+.button:hover {
+    background-color: #2c974b;
+    border-color: #1b1f2326;
+    transition-duration: 0.1s;
 }
