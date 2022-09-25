@@ -152,6 +152,7 @@ export default function App() {
                     type="button"
                     key={`${dimensions[i]}`}
                     onClick={() => {
+                      setEncryptedMatrice([]);
                       setWordMatrice(generateWordMatrice(dimensions[i][0], dimensions[i][1], localWord));
 
                       //key should have the opposite dimensions of the original
@@ -175,6 +176,7 @@ export default function App() {
               setWord('');
               setWordMatrice([]);
               setKeyMatrice([]);
+              setEncryptedMatrice([]);
             }
 
           }}
@@ -185,20 +187,26 @@ export default function App() {
           {buttons}
         </div>
 
-        {word !== ''
-          &&
-          <>
-            <Matrice matrice={wordMatrice} color={"#32CD32"} showChar={true}/>
-            <Matrice matrice={keyMatrice} color={"#006994"} showChar={false}/>
-          </>
-        }
-        
         <button
+          className="alt"
           onClick={()=>{
             setEncryptedMatrice(multiplyMatrices(wordMatrice, keyMatrice));
           }}
         >Encrypt</button>
-        <Matrice matrice={encryptedMatrice} color={"#FFFF00"} showChar={false}/>
+        <br/>
+
+        {word !== ''
+          &&
+          <div className="matrice-container">
+            <Matrice matrice={wordMatrice} color={"#32CD32"} showChar={true}/>
+            <img src=" https://cdn-icons-png.flaticon.com/512/3/3740.png" width="128" height="128" alt="" title=""></img>
+            <Matrice matrice={keyMatrice} color={"#006994"} showChar={false}/>
+            <img src=" https://cdn-icons-png.flaticon.com/512/56/56751.png" width="128" height="128" alt="" title=""></img>
+            <Matrice matrice={encryptedMatrice} color={"#FFFF00"} showChar={false}/>
+          </div>
+        }
+        
+
 
 
       </div>

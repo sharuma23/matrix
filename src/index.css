@@ -48,6 +48,11 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
+button.alt {
+  background-color: rgb(68, 21, 154);
+}
+
 button:hover {
   border-color: #646cff;
 }

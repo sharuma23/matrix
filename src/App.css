@@ -88,3 +88,11 @@ button {
     border-color: #1b1f2326;
     transition-duration: 0.1s;
 }
+
+div.matrice-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
