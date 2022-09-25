@@ -134,13 +134,14 @@ export default function App() {
       </div>
 
       <div className="input-area">
-        <h2>Enter a word to encode. <br /> It will be converted into a matrice consisting of UTF-16 decimal char codes.
+        <h2>Enter a word to encode. <br /> It will be converted into a matrice consisting of UTF-16 decimal char codes. It will then be multiplied by a randomly generated matrice of opposite dimensions, "encrypting" your message.
         </h2>
         <input
           type="text"
           name="word-to-encode"
           value={word}
           onChange={(e) => {
+
             const localWord = e.currentTarget.value;
             if (localWord !== '') {
               setWord(localWord);
@@ -191,6 +192,9 @@ export default function App() {
           className="alt"
           onClick={()=>{
             setEncryptedMatrice(multiplyMatrices(wordMatrice, keyMatrice));
+            console.log("word", wordMatrice);
+            console.log("key", keyMatrice);
+            console.log("encrypted", encryptedMatrice);
           }}
         >Encrypt</button>
         <br/>
@@ -199,16 +203,13 @@ export default function App() {
           &&
           <div className="matrice-container">
             <Matrice matrice={wordMatrice} color={"#32CD32"} showChar={true}/>
-            <img src=" https://cdn-icons-png.flaticon.com/512/3/3740.png" width="128" height="128" alt="" title=""></img>
-            <Matrice matrice={keyMatrice} color={"#006994"} showChar={false}/>
-            <img src=" https://cdn-icons-png.flaticon.com/512/56/56751.png" width="128" height="128" alt="" title=""></img>
-            <Matrice matrice={encryptedMatrice} color={"#FFFF00"} showChar={false}/>
+            <img src=" https://cdn-icons-png.flaticon.com/512/3/3740.png" width="128" height="128" alt="" title="" style={{padding: "35px"}}></img>
+            <Matrice matrice={keyMatrice} color={"#006994"} showChar={true}/>
+            <img src=" https://cdn-icons-png.flaticon.com/512/56/56751.png" width="128" height="128" alt="" title="" style={{padding: "35px"}}></img>
+            <Matrice matrice={encryptedMatrice} color={"#FFFF00"} showChar={true}/>
           </div>
         }
         
-
-
-
       </div>
     </div>
   )

@@ -15,11 +15,12 @@ export default function Matrice(props: PropTypes) {
 
   const styles = {
     container: {
-      display: "flex",
+      display: "grid",
       gap: "10px",
-      width: `${110 * columnCount + 5 * (columnCount - 1)}px`,
-      flexWrap: "wrap",
-      justifyContent: "center"
+      // width: `${110 * columnCount + 5 * (columnCount - 1)}px`,
+      gridTemplateColumns: `repeat(${columnCount}, 100px)`,
+      // flexWrap: "wrap",
+      // justifyContent: "center"
     },
     cell: {
       backgroundColor: props.color,
